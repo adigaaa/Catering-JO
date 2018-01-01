@@ -1,0 +1,52 @@
+{% extends 'adminPanel/index.twig' %}
+{% block content %}
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Add Product</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+<form method="POST" action="{{ path_for('storeProduct') }}" enctype="multipart/form-data">
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Name</label>
+    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Name" name="name" value="{{ old.name }}" >
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlSelect1">Categories</label>
+    <select class="form-control" id="exampleFormControlSelect1" name="cat_id">
+      {% for category in categories %}
+       <option value="{{ category.id }}" >{{ category.name }}</option>
+      {% endfor %}
+
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Price</label>
+    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Price" name="price" value="{{ old.price }}" >
+  </div>
+
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Description</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description">{{ old.description }}</textarea>
+  </div>
+
+   <div class="form-group">
+    <label for="exampleFormControlFile1">Upload Image</label>
+    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="image">
+  </div>
+    <input type="submit" class="btn bnt-primary" name="">
+{% if errors is not null %}
+  {% for error in errors %}
+    <ul class="list-group">
+    {% for details in error %}
+      <li class="list-group-item list-group-item-danger" >{{ details }}</li>
+    {% endfor %}
+    </ul>
+  {% endfor %}
+{% endif %}
+
+</form>
+
+{% endblock %}

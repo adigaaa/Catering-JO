@@ -1,0 +1,80 @@
+
+{% include 'usersView/header.html' %}
+{% include 'usersView/nav.html' %}
+<div class="container">
+  <div class="row">
+        <div class="span12">
+        <div class="" id="loginModal">
+              <div class="modal-body">
+                <div class="well">
+                  <ul class="nav nav-tabs">
+                    <li class="active"><a href="#login" data-toggle="tab">Login</a></li>&nbsp&nbsp
+                    <li><a href="#create" data-toggle="tab">Create Account</a></li>
+                  </ul>
+                  <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane active in" id="login">
+                      <form class="form-horizontal" action="{{ path_for('login') }}" method="POST">
+                        <fieldset>
+                          <div id="legend">
+                            <legend class="">Login</legend>
+                          </div>    
+                          <div class="control-group">
+                            <!-- Username -->
+                            <label class="control-label"  for="username">Username</label>
+                            <div class="controls">
+                              <input type="text" id="username" name="username" placeholder="" class="input-xlarge" value="{{OldInput.username}}">
+                            </div>
+                          </div>
+     
+                          <div class="control-group">
+                            <!-- Password-->
+                            <label class="control-label" for="password">Password</label>
+                            <div class="controls">
+                              <input type="password" id="password" name="password" placeholder="" class="input-xlarge">
+                            </div>
+                          </div>
+     
+     
+                          <div class="control-group">
+                            <!-- Button -->
+                            <div class="controls">
+                              <button class="btn btn-success">Login</button>
+                            </div>
+                          </div>
+                        </fieldset>
+                      </form>                
+                    </div>
+                    <div class="tab-pane fade" id="create">
+                      <form id="tab" method="POST" action="{{ path_for('register') }}">
+                        <label>Username</label><br>
+                        <input type="text" value="{{old.username}}" class="input-xlarge" name="username"><br>
+                        <label>password</label><br>
+                        <input type="password" value="" class="input-xlarge" name="password"><br>
+                        <label>confirm password</label><br>
+                        <input type="password" value="" class="input-xlarge" name="confirmP"><br>
+                        <label>Email</label><br>
+                        <input type="text" value="{{old.email}}" class="input-xlarge" name="email"><br>
+     
+                        <div>
+                          <button class="btn btn-primary">Create Account</button>
+                        </div>
+                      </form>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+  </div>
+</div>
+{% if errors is not null %}
+  {% for error in errors %}
+    <ul class="list-group">
+    {% for details in error %}
+      <li class="list-group-item list-group-item-danger" >{{ details }}</li>
+    {% endfor %}
+    </ul>
+  {% endfor %}
+{% endif %}
+
+
+{% include 'usersView/footer.html' %}

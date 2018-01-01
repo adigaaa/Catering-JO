@@ -1,0 +1,49 @@
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="{{ path_for('homePage') }}">YCK</a>
+        <a class="navbar-brand" href="{{ path_for('adminPanel') }}">Admin Page</a>
+        {% if user_id is  null%}
+        <a class="navbar-brand" href="{{ path_for('login.register') }}">login/Register</a>
+        {% endif %}
+        {% if user_id is not null%}
+        <a class="navbar-brand" href="{{ path_for('my.orders') }}">My Orders</a>
+        {% endif %}
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="{{ path_for('homePage') }}">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ path_for('about') }}">About</a>
+            </li>
+          </ul>
+              {% if user_id is not null %}
+               <ul class="nav navbar-top-links navbar-right">
+                  <li class="dropdown">
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                          <i class="fa fa-user fa-fw"></i> Menu<i class="fa fa-caret-down"></i>
+                      </a>
+                      <ul class="dropdown-menu dropdown-user">
+                          <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                          </li>
+                          <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                          </li>
+                          <li class="divider"></li>
+                          <li><a href="{{ path_for('logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                          </li>
+                      </ul>
+                      <!-- /.dropdown-user -->
+                  </li>
+                  <!-- /.dropdown -->
+              
+              </ul>
+              {% endif %}
+        </div>
+      </div>
+    </nav>

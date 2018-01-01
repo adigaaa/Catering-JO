@@ -1,0 +1,30 @@
+{% extends 'adminPanel/index.twig' %}
+{% block content %}
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Users</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+      
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+    	{% for user in users %}
+		    <tr>
+		        <td>{{ user.username }}</td>
+		        <td>{{ user.email }}</td>
+		        <td><a href="{{ path_for('delete.users') }}{{ user.id }}">Delete</a></td>
+		    </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% include 'usersView/header.html' %}
+{% include 'usersView/nav.html' %}
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Order #</th>
+      <th scope="col">Product Name</th>
+      <th scope="col">price</th>
+      <th scope="col">created_at</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+  	{% for order in orders %}
+    <tr>
+      <th scope="row">{{ order.id }}</th>
+      <td>{{ order.product }}</td>
+      <td>${{ order.price }}</td>
+      <td>{{ order.created_at }}</td>
+      <td><a href="{{ path_for('order.delete') }}{{ order.id }}">Delete</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+{% include 'usersView/footer.html' %}

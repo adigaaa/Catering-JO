@@ -1,0 +1,88 @@
+{% extends 'adminPanel/index.twig' %}
+{% block content %}
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Update Product</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+<form id="form" method="POST" action="{{ path_for('update') }}{{ old.id }}" enctype="multipart/form-data">
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Name</label>
+    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Name" name="name" value="{{ old.name }}" >
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlSelect1">Categories</label>
+    <select class="form-control" id="exampleFormControlSelect1" name="cat_id">
+      {% for category in categories %}
+        {% if category.id == old.cat_id %}
+          <option value="{{ category.id }}" selected>{{ category.name }}</option>
+        {% else %}
+          <option value="{{ category.id }}" >{{ category.name }}</option>
+        {% endif %}
+       
+      {% endfor %}
+
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Price</label>
+    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Price" name="price" value="{{ old.price }}" >
+  </div>
+
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Description</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description">{{ old.description }}</textarea>
+  </div>
+
+    <input type="submit" class="btn bnt-primary" name="">
+{% if errors is not null %}
+  {% for error in errors %}
+    <ul class="list-group">
+    {% for details in error %}
+      <li class="list-group-item list-group-item-danger" >{{ details }}</li>
+    {% endfor %}
+    </ul>
+  {% endfor %}
+{% endif %}
+
+</form>
+
+<script type="text/javascript">
+  
+  (function() {
+    let inputs = document.querySelectorAll("input");
+    let select = document.querySelector("select");
+    select = select.options[select.selectedIndex].value;
+    inputs = [inputs[1], inputs[2], document.querySelector("textarea")];
+
+    for (let i = 0; i < inputs.length; i ++)
+      inputs[i] = inputs[i].value;
+    console.log(inputs);
+    console.log(select);
+
+    document.querySelector('#form').addEventListener('submit', e => {
+      let name = document.getElementsByName('name')[0];
+      let price = document.getElementsByName('price')[0];
+      let desc = document.getElementsByName('description')[1];
+      let cat_id = document.getElementsByName('cat_id')[0];
+      _cat_id = cat_id.options[cat_id.selectedIndex].value;
+      if(inputs[0] === name.value) {
+        name.setAttribute('name', "");
+      }
+      if(inputs[1] === price.value) {
+        price.setAttribute('name', "");
+      }
+      if(inputs[2] === desc.value) {
+        desc.setAttribute('name', "");
+      }
+      if(select === _cat_id) {
+        cat_id.setAttribute('name', "");
+      }
+    })
+  })();
+
+</script>
+{% endblock %}

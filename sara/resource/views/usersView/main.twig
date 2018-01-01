@@ -1,0 +1,57 @@
+{% extends 'usersView/index.twig' %}
+{% block title %}Main Page{% endblock %}
+{% block content %}
+
+
+    <!-- Page Content -->
+    <div class="container">
+
+      <div class="row">
+
+        <!-- Post Content Column -->
+        <div class="col-lg-8">
+          {% for product in products %}
+          <!-- Title -->
+          <h1 class="mt-4">{{ product.name }}</h1>
+
+          <!-- Author -->
+          <p class="lead">
+            by
+            <a href="{{ path_for('search.by.cat') }}{{ product.cat_id }}">{{ product.cat_name }}</a>
+          </p>
+
+          <hr>
+
+          <!-- Date/Time -->
+          <p>Posted on {{ product.updated_at }}</p>
+
+          <hr>
+
+          <!-- Preview Image -->
+          <a href="{{ path_for('orderForm') }}{{ product.id }}"><img class="img-fluid rounded" src="{{ base_url() }}/resource/uploads/{{ product.image }}" alt=""></a>
+
+          <hr>
+
+          <!-- Post Content -->
+          <p class="lead">{{ product.description }}</p>
+          <h3> ${{ product.price }} </h3>
+          {% if user_id is not null %}
+          <a href="{{ path_for('orderForm') }}{{ product.id }}" class="btn btn-info" role="button">Add to cart</a>
+          {% endif %}
+          <hr>
+
+       
+      <!-- /.row -->
+       {% endfor %}
+    </div>
+{#     <div class="pagination">
+  <ul>
+    <li class="disabled"><a href="#">&laquo;</a></li>
+    <li class="active"><a href="#">1</a></li>
+    ...
+  </ul>
+</div> #}
+
+   
+
+{% endblock %}
